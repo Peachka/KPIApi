@@ -26,21 +26,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/enterGroup"
-            android:layout_width="380dp"
-            android:layout_height="62dp"
-            android:hint="Enter your text here"
-            android:imeOptions="actionDone"
-            android:inputType="textMultiLine"
-            android:maxLines="5"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="338dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
+                android:layout_width="380dp"
+                android:layout_height="60dp"
+                android:completionThreshold="1"
+                android:layout_marginLeft="20dp"
+                android:hint="Enter Group" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="361dp"
                 android:layout_height="336dp"
+                android:layout_marginLeft="20dp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="2dp" />
 
@@ -50,6 +49,7 @@
                 android:layout_width="311dp"
                 android:layout_height="63dp"
                 android:ems="10"
+                android:layout_marginLeft="20dp"
                 android:inputType="textPersonName"
                 android:text="Name"
                 tools:layout_editor_absoluteY="34dp" />

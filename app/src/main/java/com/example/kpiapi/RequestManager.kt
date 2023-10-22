@@ -15,6 +15,27 @@ class RequestManager(context: Context) {
 
     val singletonInstance = Singletone.getInstance(context)
 
+    fun GroupListRequest(successListener: (List<String>) -> Unit, errorListener: () -> Unit){
+        val request = JsonObjectRequest(Request.Method.GET, groupUrl, null,
+            { response ->
+                val dataArray = response.getJSONArray("data")
+                var listOfGroups = mutableListOf<String>()
+                for (i in 0 until dataArray.length()) {
+                    val item = dataArray.getJSONObject(i)
+//                    Log.e("name", item.getString("name"))
+                    listOfGroups.add(item.getString("name"))
+                }
+                successListener(listOfGroups)
+            },
+            {
+                errorListener()
+            }
+        )
+        singletonInstance.addToRequestQueue(request)
+
+    }
+
+
     fun makeGroupRequest( inputName: String,  successListener: (String, String) -> Unit, errorListener: () -> Unit) {
         val request = JsonObjectRequest(Request.Method.GET, groupUrl, null,
             { response ->
@@ -23,10 +44,6 @@ class RequestManager(context: Context) {
                 for (i in 0 until dataArray.length()) {
                     val item = dataArray.getJSONObject(i)
                     val name = item.getString("name")
-                    Log.e("manager name", name)
-
-                    Log.e("equals",(name == inputName).toString() )
-
                     if (name == inputName) {
                         val id = item.getString("id")
                         val faculty = item.getString("faculty")
